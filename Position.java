@@ -9,7 +9,7 @@ public class Position {
     }
 
     boolean insideBoard(){
-        if(line < 0 || column < 0 || line > 7 || column > 7){
+        if(line < 0 || column < 0 || line >= Board.SIZE || column >= Board.SIZE){
             return false;
         }
         return true;

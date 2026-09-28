@@ -1,6 +1,6 @@
 public class Piece {
 
-    char type;      // type stands for the type of piece (hook, knight, queen...)
+    char type;      // type stands for the type of piece (rook, knight, queen...)
     boolean color;
 
     public Piece(char type, boolean color){
