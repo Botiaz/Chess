@@ -8,7 +8,7 @@ public class Position {
         this.column = column;
     }
 
-    boolean insideBoard(){
+    boolean insideBoard(){           //checks if the position is inside the board
         if(line < 0 || column < 0 || line >= Board.SIZE || column >= Board.SIZE){
             return false;
         }

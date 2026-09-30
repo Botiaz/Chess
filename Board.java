@@ -1,6 +1,6 @@
 public class Board {
 
-    static final int SIZE = 8;              // lado do tabuleiro: o unico lugar que sabe disso
+    static final int SIZE = 8;              // board size
     Piece[][] squares = new Piece[SIZE][SIZE];
 
     public Board() {
@@ -8,10 +8,10 @@ public class Board {
 
         char [] ordem = {'R','N','B','Q','K','B','N','R'};
         for (int j = 0; j < SIZE; j++) {
-            squares[0][j] = new Piece (ordem[j], true);                          // fileira 1: whites from behind
-            squares[1][j] = new Piece('P', true);                               // fileira 2: pawns ahead
-            squares[6][j] = new Piece('P', false);                               // fileira 7: black pawns
-            squares[7][j] = new Piece (ordem[j], false);                          // fileira 8: blacks behind
+            squares[0][j] = new Piece (ordem[j], true);                          //  whites from behind
+            squares[1][j] = new Piece('P', true);                           // pawns ahead
+            squares[6][j] = new Piece('P', false);                          // black pawns
+            squares[7][j] = new Piece (ordem[j], false);                         // blacks behind
         }
 
     }
