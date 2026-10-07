@@ -25,8 +25,13 @@ public class Piece {
 
        while(true){
         line = line + 1;
-        if(!new Position(line, column).insideBoard()) break;   // the square exists?
-        if(board.squares[line][column] != null) break;         // is the square free?
+        if(!new Position(line, column).insideBoard()) break;       // the square exists?
+        if(board.squares[line][column] != null){                   // is the square free?
+            if(this.color =! board.squares[line][column].color){   // capturing
+                System.out.println("(" + line + "," +  column + ")");
+            }
+            break;
+        }
         System.out.println("(" + line + "," +  column + ")");
        }
 
