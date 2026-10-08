@@ -4,7 +4,7 @@ public class Board {
     Piece[][] squares = new Piece[SIZE][SIZE];
 
     public Board() {
-
+ 
 
         char [] ordem = {'R','N','B','Q','K','B','N','R'};
         for (int j = 0; j < SIZE; j++) {
