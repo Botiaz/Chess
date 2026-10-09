@@ -9,7 +9,7 @@ public class Board {
         char [] ordem = {'R','N','B','Q','K','B','N','R'};
         for (int j = 0; j < SIZE; j++) {
             squares[0][j] = new Piece (ordem[j], true);                          //  whites from behind
-            squares[1][j] = new Piece('P', true);                           // pawns ahead
+            squares[1][j] = new Piece('P', true);                           // white pawns ahead
             squares[6][j] = new Piece('P', false);                          // black pawns
             squares[7][j] = new Piece (ordem[j], false);                         // blacks behind
         }
