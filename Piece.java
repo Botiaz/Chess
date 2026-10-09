@@ -21,31 +21,37 @@ public class Piece {
 
         ArrayList<Position> possibleMoves = new ArrayList<>();
 
-        if(type == 'R'){
-            addRookMoves(from, board, possibleMoves);
-        }else if(type == 'B'){
-            addBishopMoves(from, board, possibleMoves);
-        }else if(type == 'Q'){
-            addRookMoves(from, board, possibleMoves);
-            addBishopMoves(from, board, possibleMoves);
-        }else if(type == 'K'){
-            addKnightMoves(from, board, possibleMoves);
-        }
+        possibleMoves = addMoves(from, board, possibleMoves);
 
         return possibleMoves;
     }
 
-    private void addRookMoves(Position from, Board board, ArrayList<Position> possibleMoves){
 
-        
-        int[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    private ArrayList<Position>addMoves(Position from, Board board, ArrayList<Position> possibleMoves){
 
-       int line = from.line;
-       int column = from.column;
+          int[][] directions = new int[0][];
+          boolean slides = true;
 
+        if(type == 'R'){
+              directions = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}};
+        }else if(type == 'B'){
+            directions = new int[][]{{1,1}, {-1,1}, {-1,-1}, {1,-1}};
+        }else if(type == 'Q'){
+            directions = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}, {1,1}, {-1,1}, {-1,-1}, {1,-1}};
+        }else if(type == 'N'){
+            directions = new int[][]{{2,1}, {1,2}, {2,-1}, {1,-2}, {-1, 2}, {-2,1}, {-2,-1}, {-1, -2}};
+            slides = false;
+        }else if(type == 'K'){
+            directions = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}, {1,1}, {-1,1}, {-1,-1}, {1,-1}};
+            slides = false;
+        }else if(type == 'P'){
+            directions = new int[][]{{1,0}, {2,0}};
+        }
 
        for(int i=0; i<directions.length; i++){
         int []direction = directions[i];
+        int line = from.line;
+        int column = from.column;
 
         while(true){
             line += direction[0];
@@ -68,82 +74,12 @@ public class Piece {
                 break;
             }
 
+            if(slides == false) break;
 
         }
        }
 
-    }
-
-    private void addBishopMoves(Position from, Board board, ArrayList<Position> possibleMoves){
-
-        int[][] directions = {{1,1}, {-1,1}, {-1,-1}, {1,-1}};
-
-       int line = from.line;
-       int column = from.column;
-
-
-       for(int i=0; i<directions.length; i++){
-        int []direction = directions[i];
-
-        while(true){
-            line += direction[0];
-            column += direction[1];
-
-            Position position = new Position(line, column);
-
-            if(!position.insideBoard()){
-                break;
-            }
-
-            Piece piece = board.squares[line][column];
-
-            if(piece == null){
-                possibleMoves.add(position);
-            }else{
-                if(piece.color != this.color){
-                    possibleMoves.add(position); // capture
-                }
-                break;
-            }
-
-
-        }
-       }
-    }
-
-    private void addKnightMoves(Position from, Board board, ArrayList<Position> possibleMoves){
-        int[][] directions = {{2,1}, {1,2}, {2,-1}, {1,-2}, {-1, 2}, {-2,1}, {-2,1}, {-1, 2}};
-
-       int line = from.line;
-       int column = from.column;
-
-
-       for(int i=0; i<directions.length; i++){
-        int []direction = directions[i];
-
-        while(true){
-            line += direction[0];
-            column += direction[1];
-
-            Position position = new Position(line, column);
-
-            if(!position.insideBoard()){
-                break;
-            }
-
-            Piece piece = board.squares[line][column];
-
-            if(piece == null){
-                possibleMoves.add(position);
-            }else{
-                if(piece.color != this.color){
-                    possibleMoves.add(position); // capture
-                }
-                break;
-            }
-
-
-        }
-       }
+        return possibleMoves;
     }
 }
+
