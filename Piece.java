@@ -90,32 +90,29 @@ public class Piece {
         int line = from.line;
         int column = from.column;
 
-        Piece piece = board.squares[line+1][column];
+        int way;                  // whites go up, blacks go down
+        if(color) way = 1;
+        else way = -1;
 
-        Position position = new Position(line + 1, column);
+        Position forward = new Position(line + way, column);
 
-
-            if(position.insideBoard()){
-                if(piece == null){
-                    possibleMoves.add(position);
-                }
+        if(forward.insideBoard()){                              
+            if(board.squares[line + way][column] == null){   
+                possibleMoves.add(forward);
             }
-
-       /*  if(position.insideBoard()){
-            if(color == true){
-                if(board.squares[line+1][column+1] != null && board.squares[line+1][column-1].color != this.color) possibleMoves.add(new Position(line, column));
-                if(board.squares[line-1][column+1] != null && board.squares[line+1][column+1].color != this.color) possibleMoves.add(new Position(line, column));
-            }else if(color == false){
-                if(board.squares[line+1][column-1] != null && board.squares[line-1][column+1].color != this.color) possibleMoves.add(new Position(line, column));
-                if(board.squares[line-1][column-1] != null && board.squares[line-1][column-1].color != this.color) possibleMoves.add(new Position(line, column));
-            }  
         }
-*/
 
-        return possibleMoves;
+        Position diagonalRight = new Position(line + way, column + 1);
+
+        Position diagonalLeft = new Position(line + way, column - 1);
+
+        
+                if(diagonalRight.insideBoard() && board.squares[line + way][column+1] != null && board.squares[line + way][column+1].color != this.color) possibleMoves.add(diagonalRight);
+                if(diagonalLeft.insideBoard() && board.squares[line + way][column-1] != null && board.squares[line + way][column-1].color != this.color) possibleMoves.add(diagonalLeft); 
+
+
+        
+                return possibleMoves;
     }
 
-
 }
-
-
