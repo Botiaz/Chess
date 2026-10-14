@@ -102,6 +102,25 @@ public class Piece {
             }
         }
 
+        //two moves forward:
+
+
+        Position forward2 = new Position(line + way * 2, column);
+
+        int originalSquare;
+        if(color) originalSquare = 1;
+        else originalSquare = 6;
+
+        if(forward2.insideBoard()){
+                    if(line == originalSquare && board.squares[line + way][column] == null && board.squares[line + way * 2][column] == null){
+                        possibleMoves.add(forward2);
+                    }
+
+        }
+        
+
+        // diagonal moves:
+
         Position diagonalRight = new Position(line + way, column + 1);
 
         Position diagonalLeft = new Position(line + way, column - 1);
@@ -109,8 +128,6 @@ public class Piece {
         
                 if(diagonalRight.insideBoard() && board.squares[line + way][column+1] != null && board.squares[line + way][column+1].color != this.color) possibleMoves.add(diagonalRight);
                 if(diagonalLeft.insideBoard() && board.squares[line + way][column-1] != null && board.squares[line + way][column-1].color != this.color) possibleMoves.add(diagonalLeft); 
-
-
         
                 return possibleMoves;
     }
